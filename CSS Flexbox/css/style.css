@@ -1,5 +1,7 @@
 :root {
   --max-width: 960px;
+  --primary-blue: #122ab2;
+  --accent-blue: #2c70ff;
 }
 
 body, h1, h2, p, ul, li, a {
@@ -32,7 +34,7 @@ img {
 /* Superinfo */
 
 .superinfo-bg {
-  background: #122ab2;
+  background: var(--primary-blue);
   color: white;
 }
 
@@ -57,7 +59,7 @@ img {
 /* Menu */
 
 .menu-bg {
-  background: #2c70ff;
+  background: var(--accent-blue);
 }
 
 .menu {
@@ -93,5 +95,49 @@ img {
 }
 
 .menu-nav a:hover {
-  color: #122ab2;
+  color: var(--primary-blue);
+}
+
+/* Introdução */
+
+.introducao {
+  font-size: 3em;
+  line-height: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 60px 10px;
+}
+
+/* Sobre */
+
+.sobre {
+  border-top: 2px solid var(--accent-blue);
+  border-bottom: 2px solid var(--accent-blue);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 60px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sobre-info {
+  flex: 2 1 300px;
+  margin: 0 10px;
+}
+
+.sobre-info h1 {
+  font-size: 3em;
+  margin-bottom: .5em;
+}
+
+.sobre-info p {
+  font-size: 1.25em;
+  line-height: 1.4;
+  margin-bottom: 1em;
+  color: #7c7c7c;
+}
+
+.sobre-img {
+  flex: 1 1 160px;
+  margin: 0 10px;
 }
