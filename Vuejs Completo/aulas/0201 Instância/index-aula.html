@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0201</title>
+  </head>
+  <body>
+    <div id="app">{{ nomeProduto }}</div>
+    <script>
+      function VueClone(options) {
+        this.options = options;
+        this.$el = document.querySelector(options.el);
+        this.data = options.data;
+      }
+
+      const vmClone = new VueClone({
+        el: "#app",
+        data: {
+          nome: "Martelo",
+        },
+      });
+
+      console.log(vmClone);
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          instrumento: "Violão",
+          cor: "Marrom",
+        },
+        computed: {
+          nomeProduto() {
+            let $this = this;
+            setTimeout(function () {
+              console.log($this.instrumento);
+            }, 1000);
+            return `${this.instrumento} ${this.cor}`;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

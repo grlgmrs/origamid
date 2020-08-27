@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js"></script>
+  <title>Aula 0201 - Ex 1</title>
+</head>
+<body>
+  <div id="app1">
+    {{ ferramenta }}
+  </div>
+  <div id="app2">
+    {{ instrumento }}
+  </div>
+
+  <script>
+    const vm1 = new Vue({
+      el: "#app1",
+      data: {
+        ferramenta: "Tesoura"
+      }
+    });
+
+    const vm2 = new Vue({
+      el: "#app2",
+      data: {
+        instrumento: "Guitarra"
+      }
+    })
+  </script>
+</body>
+</html>
