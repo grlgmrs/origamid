@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js"></script>
+  <title>Aula 0106</title>
+</head>
+<body>
+  <div id="app">
+    <h1 :style="{color: cor}">{{ titulo }}</h1>
+    <p>{{ comprou ? "sim, comprou" : "não, ainda não comprou" }}</p>
+    <div v-if="comprou">
+      <p>{{ conteudo }}</p>
+      <p>{{ lado * 4 }}</p>
+      <a :href="comprou ? href : ''">{{ href }}</a>
+    </div>
+    <p>
+      <input v-model="cor" type="color">
+      {{ cor }}
+    </p>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        titulo: "Curso de Vue.js",
+        conteudo: "Esse é o conteúdo",
+        lado: 5,
+        comprou: true,
+        href: "https://www.origamid.com.br",
+        cor: "#6414A0"
+      }
+    });
+  </script>
+</body>
+</html>
