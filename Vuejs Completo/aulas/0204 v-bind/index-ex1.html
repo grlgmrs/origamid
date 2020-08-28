@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0204 - Ex 1</title>
+
+    <style>
+      .lower h1 {
+        color: tomato;
+      }
+
+      .greater h1 {
+        color: greenyellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div :class="google.class">
+        <h1>Google</h1>
+        <ul>
+          <li>marketCap: {{ google.marketCap }}</li>
+        </ul>
+      </div>
+      <div :class="apple.class">
+        <h1>Apple</h1>
+        <ul>
+          <li>marketCap: {{ apple.marketCap }}</li>
+        </ul>
+      </div>
+
+      <button @click="getchInfo">Get Info</button>
+    </div>
+
+    <script>
+      const iexapisToken = "";
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          apple: {
+            class: "",
+            marketCap: 0,
+          },
+          google: {
+            class: "",
+            marketCap: 0,
+          },
+        },
+        methods: {
+          getchInfo() {
+            console.log("clicado");
+            var appleInfo;
+            var googleInfo;
+
+            fetch(
+              `https://cloud.iexapis.com/stable/stock/AAPL/quote/2?token=${iexapisToken}`,
+              {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers":
+                  "Origin, X-Request-Width, Content-Type, Accept",
+              }
+            )
+              .then((response) => response.json())
+              .then((appleJson) => {
+                fetch(
+                  `https://cloud.iexapis.com/stable/stock/GOOGL/quote/2?token=${iexapisToken}`,
+                  {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers":
+                      "Origin, X-Request-Width, Content-Type, Accept",
+                  }
+                )
+                  .then((response) => response.json())
+                  .then((json) => {
+                    this.apple.marketCap = appleJson.marketCap;
+                    this.google.marketCap = json.marketCap;
+
+                    if (this.google.marketCap <= this.apple.marketCap) {
+                      this.google.class = "lower";
+                      this.apple.class = "greater";
+                    } else {
+                      this.google.class = "greater";
+                      this.apple.class = "lower";
+                    }
+                  });
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

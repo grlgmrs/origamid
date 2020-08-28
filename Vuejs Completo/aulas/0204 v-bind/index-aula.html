@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0204</title>
+  </head>
+  <body>
+    <div id="app">
+      <a :href="link">Link Google</a>
+      <p :class="cor" class="vermelho">Texto</p>
+      <p :class="comprou ? 'verde': 'preto'">{{ comprou ? 'verde': 'preto' }}</p>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          link: "https://google.com.br",
+          cor: "azul",
+          comprou: true,
+        },
+      });
+    </script>
+  </body>
+</html>
