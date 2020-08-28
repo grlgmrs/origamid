@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0203 - Ex 1</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="getchInfo">Ver preço</button>
+      <p v-if="companyName">
+        {{ companyName }}, {{ latestPrice }}, {{ latestTime }}
+      </p>
+    </div>
+    <script>
+      const iexapisToken = "";
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          latestPrice: null,
+          latestTime: null,
+          companyName: "",
+        },
+        methods: {
+          getchInfo() {
+            fetch(
+              `https://cloud.iexapis.com/stable/stock/AAPL/quote/2?token=${iexapisToken}`,
+              {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers":
+                  "Origin, X-Request-Width, Content-Type, Accept",
+              }
+            )
+              .then((response) => response.json())
+              .then((json) => {
+                this.latestPrice = json.latestPrice;
+                this.latestTime = json.latestTime;
+                this.companyName = json.companyName;
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
