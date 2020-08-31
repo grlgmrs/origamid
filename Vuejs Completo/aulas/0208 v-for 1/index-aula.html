@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0208</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>Cursos</h3>
+      <ul>
+        <li v-for="(curso, index) in cursos">{{ curso }}</li>
+      </ul>
+      <h3>Estados</h3>
+      <ul>
+        <li v-for="({nome, populacao}, key) in estados" :key="key">
+          {{ nome }} - {{ populacao }} | {{ key }}
+        </li>
+      </ul>
+      <h3>Lista</h3>
+      <ul>
+        <li v-for="(item, index) in lista">{{ item }}</li>
+      </ul>
+      <button @click="removeItem">Remover item</button>
+      <button @click="addItem">Adicionar item</button>
+      <button @click="modifyItem">Modificar item</button>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          cursos: ["HTML", "CSS", "JavaScript", "PHP", "WordPress"],
+          estados: {
+            sp: {
+              populacao: "45 milhões",
+              nome: "São Paulo",
+            },
+            mg: {
+              populacao: "21 milhões",
+              nome: "Minas Gerais",
+            },
+            rj: {
+              populacao: "17 milhões",
+              nome: "Rio de Janeiro",
+            },
+          },
+          lista: ["Item 1", "Item 2", "Item 3"]
+        },
+        methods: {
+          removeItem() {
+            this.lista.pop();
+          },
+          addItem() {
+            this.lista.push(`Item ${this.lista.length + 1}`);
+          },
+          modifyItem() {
+            // Maneira errada
+            // this.lista[0] = "Banana";
+
+            this.$set(this.lista, 0, "Banana");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
