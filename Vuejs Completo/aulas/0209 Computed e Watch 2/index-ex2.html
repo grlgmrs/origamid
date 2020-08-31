@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0209 - Ex 2</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>Paises</h3>
+      <select v-model="selectedCountry">
+        <option v-for="({name, numericCode}, index) in countries" :value="numericCode">{{ name }}</option>n>
+      </select>
+      <h2 v-show="capital">{{ capital }}</h2>
+    </div>
+    <script>
+      const countriesApi = "https://restcountries.eu/rest/v2/all";
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          countries: [],
+          selectedCountry: "",
+          capital: ""
+        },
+        watch: {
+          selectedCountry(newV) {
+            var country = this.countries.find(c => c.numericCode === newV);
+
+            this.capital = country.capital;
+          }
+        }
+      });
+
+      fetch(countriesApi)
+        .then((r) => r.json())
+        .then((r) => {
+          vm.countries = r;
+          console.log(r);
+        });
+    </script>
+  </body>
+</html>

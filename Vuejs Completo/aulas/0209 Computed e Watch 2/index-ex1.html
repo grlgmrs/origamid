@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../vue.js"></script>
+  <title>Aula 0209 - Ex 1</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li>Nome: {{ nome }}</li>
+      <li>Sobrenome: {{ sobrenome }}</li>
+      <li>Nome completo: {{ nomeCompleto }}</li>
+    </ul>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        nome: "Gabriel",
+        sobrenome: "Rocha Guimarães"
+      },
+      computed: {
+        nomeCompleto() {
+          return this.nome + " " + this.sobrenome;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
