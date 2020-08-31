@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0303 - Ex 2</title>
+  </head>
+  <body>
+    <div id="app">
+      <form>
+        <label for="nome">Nome</label><br />
+        <input type="text" name="nome" v-model="nome" /><br />
+        <label for="email">Email</label><br />
+        <input type="email" name="email" v-model="email" /><br />
+        <label for="telefone">Telefone</label><br />
+        <input type="text" name="telefone" v-model="telefone" /><br />
+        <label for="mensagem">Mensagem</label><br />
+        <textarea
+          name="mensagem"
+          v-model="mensagem"
+          cols="32"
+          rows="3"
+        ></textarea>
+        <br />
+        <button type="submit" @click.prevent="showInfo">
+          Mostrar informacoes
+        </button>
+      </form>
+      <div v-if="resultado.nome">
+        {{ nome }}, {{ email }}, {{ telefone }}, {{ mensagem }}
+      </div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          nome: "",
+          email: "",
+          telefone: "",
+          mensagem: "",
+          resultado: {}
+        },
+        methods: {
+          showInfo() {
+            this.resultado = {
+              nome: this.nome,
+              email: this.email,
+              telefone: this.telefone,
+              mensagem: this.mensagem
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

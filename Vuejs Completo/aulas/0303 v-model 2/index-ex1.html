@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0303 - Ex 1</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <input type="text" v-model="button.width" /><br />
+        <input type="text" v-model="button.height" /><br />
+        <input type="text" v-model="button.fontSize" /><br />
+        <input type="text" v-model="button.fontFamily" /><br />
+        <input type="text" v-model="button.background" /><br />
+        <input type="text" v-model="button.color" /><br />
+        <input type="text" v-model="button.borderRadius" /><br />
+
+        <br />
+
+        <button :style="formattedButton">Eu sou um botao</button>
+      </div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          button: {
+            width: 100,
+            height: 46,
+            fontSize: 20,
+            fontFamily: "Arial",
+            textAlign: "center",
+            background: "tomato",
+            color: "white",
+            borderRadius: "4",
+            border: "1px solid"
+          },
+        },
+        computed: {
+          formattedButton() {
+            return {
+              ...this.button,
+              width: this.button.width + "px",
+              height: this.button.height + "px",
+              fontSize: this.button.fontSize + "px",
+              borderRadius: this.button.borderRadius + "px",
+            };
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
