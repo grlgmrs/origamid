@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0208 - Ex 1</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>Cep</h3>
+      <div>
+        <h6>Ordenada manualmente</h6>
+        <p>
+          {{ local.logradouro }} {{ local.complemento }}, {{ local.bairro }}, {{
+          local.cep }} - {{ local.localidade }}/{{ local.uf }}
+        </p>
+        <h6>Com v-for</h6>
+        <ul>
+          <li v-for="(item, key) in local">{{ key }}: {{ item }} </li>
+        </ul>
+      </div>
+      <h3>Cursos</h3>
+      <ul>
+        <li v-for="({curso, link, aulas}, key, index) in cursos">
+          <a :href="link">{{ curso }}</a>
+          <ul>
+            <li v-for="({nome, tempo}, i) in aulas">{{ nome }} - {{ tempo }}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script>
+      const cepApi = "https://viacep.com.br/ws/04538133/json";
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          local: {},
+          cursos: [],
+        },
+        methods: {},
+      });
+
+      fetch(cepApi)
+        .then((response) => response.json())
+        .then((response) => {
+          vm.local = response;
+        });
+
+      fetch("./cursos.json")
+        .then((r) => r.json())
+        .then((r) => {
+          vm.cursos = r;
+        });
+    </script>
+  </body>
+</html>
