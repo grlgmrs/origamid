@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+
+    <style>
+      .blue {
+        color: cadetblue;
+      }
+
+      .ativo {
+        background-color: coral;
+      }
+
+      .negrito {
+        font-weight: bold;
+      }
+    </style>
+    <title>Aula 0302</title>
+  </head>
+  <body>
+    <div id="app">
+      <p :class="cor">Alguma cor</p>
+      <p :class="[cor, classAtivo]">
+        Alguma cor com nome da classe dentro da variavel
+      </p>
+      <p :class="[cor, {ativo: !estaAtivo}]">Alguma cor mista</p>
+      <p :class="{ativo: estaAtivo, negrito: estaNegrito}">Mostrar texto</p>
+      <button @click="estaAtivo = !estaAtivo">Toggle</button>
+
+      <p :style="{background: bgColor, fontSize: fontSize + 'px'}">Texto Ativo</p>
+      <button @click="fontSize++">Aumentar</button>
+
+      <p :style="estiloParagrafo">Novo Texto</p>
+      <p :style="estiloParagrafo2">Novo Texto 2</p>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          cor: "blue",
+          estaAtivo: true,
+          estaNegrito: true,
+          classAtivo: "ativo",
+          bgColor: "tomato",
+          fontSize: 20,
+          estiloParagrafo: {
+            background: "tomato",
+            fontSize: "24px",
+            color: "white",
+            fontWeight: "bold"
+          },
+        },
+        computed: {
+          estiloParagrafo2() {
+            const tamanho = Math.random() * 100;
+            return {
+              fontSize: tamanho + "px"
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
