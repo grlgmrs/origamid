@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0205</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <button @click="contador++">Clique aqui</button>
+        <p>{{ contador }}</p>
+      </div>
+      
+      <div>
+        <button @click="ativo = !ativo">Toogle</button>
+        <div v-if="ativo">Mostrar texto</div>
+      </div>
+
+      <a href="#interno" @click.prevent.once="handleClick">Link interno</a>
+
+      <input type="text" @keyup.enter="handleClick">
+
+      <p @mousemove="handleMove">Esse é o mouse x: {{ mouse.x }}</p>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          contador: 0,
+          ativo: true,
+          mouse: ""
+        },
+        methods: {
+          handleClick(e) {
+            console.log(e);
+          },
+          handleMove(e) {
+            this.mouse = e;
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

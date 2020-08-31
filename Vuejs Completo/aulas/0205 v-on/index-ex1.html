@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0205 - Ex 1</title>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="companyName">
+        <h1>{{ companyName }}</h1>
+        <ul>
+          <li>LatestPrice: {{ latestPrice }}</li>
+          <li>marketCap: {{ marketCap }}</li>
+        </ul>
+      </div>
+
+      <ul>
+        <li>
+          <a
+            :href="'https://cloud.iexapis.com/stable/stock/AAPL/quote/2?token=' + iexapisToken"
+            @click.prevent="iexFetch"
+            >Apple</a
+          >
+        </li>
+        <li>
+          <a
+            :href="'https://cloud.iexapis.com/stable/stock/GOOGL/quote/2?token=' + iexapisToken"
+            @click.prevent="iexFetch"
+            >Google</a
+          >
+        </li>
+        <li>
+          <a
+            :href="'https://cloud.iexapis.com/stable/stock/AMZN/quote/2?token=' + iexapisToken"
+            @click.prevent="iexFetch"
+            >Amazon</a
+          >
+        </li>
+        <li>
+          <a
+            :href="'https://cloud.iexapis.com/stable/stock/EBAY/quote/2?token=' + iexapisToken"
+            @click.prevent="iexFetch"
+            >Ebay</a
+          >
+        </li>
+        <li>
+          <a
+            :href="'https://cloud.iexapis.com/stable/stock/PYPL/quote/2?token=' + iexapisToken"
+            @click.prevent="iexFetch"
+            >Paypal</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          iexapisToken: "",
+          companyName: "",
+          latestPrice: 0,
+          marketCap: 0,
+        },
+        methods: {
+          iexFetch(e) {
+            const path = e.target.href;
+
+              fetch(path, {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers":
+                  "Origin, X-Request-Width, Content-Type, Accept",
+              })
+                .then((response) => response.json())
+                .then((json) => {
+                  this.latestPrice = json.latestPrice;
+                  this.marketCap = json.marketCap;
+                  this.companyName = json.companyName;
+                });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
