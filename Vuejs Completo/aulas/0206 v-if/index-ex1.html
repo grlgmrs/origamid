@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0206 - Ex 1</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>Televisor LG</h3>
+      <button v-if="product.quantity" @click="removeItem">-</button>
+      <button v-if="aQty() > 0" @click="addItem">+</button>
+      <p v-else="">
+        Não é possível adicionar mais do que {{ product.originalQuantity }}
+        itens
+      </p>
+      <p>Total do carrinho: {{ product.quantity }}</p>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          product: {
+            originalQuantity: 7,
+            quantity: 0,
+          },
+        },
+        methods: {
+          aQty() /* Actual Quantity */ {
+            return this.product.originalQuantity - this.product.quantity;
+          },
+          addItem() {
+            if (this.aQty() > 0) {
+              this.product.quantity++;
+            }
+          },
+          removeItem() {
+            if (this.product.quantity > 0) {
+              this.product.quantity--;
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
