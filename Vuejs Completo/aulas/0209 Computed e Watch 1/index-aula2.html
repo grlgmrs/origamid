@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0209</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" placeholder="cep" maxlength="8" v-model="cep" />
+      <h1>{{ cep }}</h1>
+      <ul>
+        <li v-for="(item, key) in endereco">{{ key }}: {{ item }}</li>
+      </ul>
+    </div>
+    <script>
+      const viaCep = "https://viacep.com.br/ws/\$cep/json";
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          cep: "",
+          endereco: ""
+        },
+        watch: {
+          cep(newV) {
+            if (newV.length === 8) {
+              fetch(viaCep.replace("\$cep", newV))
+                .then((r) => r.json())
+                .then((r) => {
+                  this.endereco = r;
+                });
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0209</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <h3>Preco</h3>
+        <p>
+          Preco: {{ preco }}, Desconto: {{ desconto }}
+          <b>Preco final: {{ total }}</b>
+        </p>
+      </div>
+
+      <div>
+        <h3>Carros</h3>
+        <ul>
+          <li v-for="carro in carros">{{ carro.marca }}</li>
+        </ul>
+        <h2>Carros Azuis</h2>
+        <ul>
+          <li v-for="carro in getCarrosAzuis">{{ carro.marca }}</li>
+        </ul>
+        <button @click="removeCar">Remover carro</button>
+      </div>
+
+      <div>
+        <h3>Contador</h3>
+        <p>{{ contador }}</p>
+        <button @click="addCounter">Adicionar</button>
+      </div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          contador: 0,
+          preco: 59,
+          desconto: 10,
+          carros: [
+            {
+              marca: "VW",
+              cor: "Azul",
+            },
+            {
+              marca: "Ford",
+              cor: "Preto",
+            },
+            {
+              marca: "Renaut",
+              cor: "Vermelho",
+            },
+            {
+              marca: "Tesla",
+              cor: "Azul",
+            },
+          ],
+        },
+        computed: {
+          total() {
+            return "R$ " + (this.preco - this.desconto);
+          },
+          getCarrosAzuis() {
+            return this.carros.filter((carro) => carro.cor === "Azul");
+          },
+        },
+        methods: {
+          removeCar() {
+            this.carros.pop();
+          },
+          addCounter() {
+            this.contador++;
+          }
+        },
+        watch: {
+          contador(newV, oldV) {
+            console.log(newV, oldV);
+            if(this.contador > 5) {
+              this.removeCar();
+            }
+          },
+          carros(newV, oldV) {
+            console.log(newV, oldV);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
