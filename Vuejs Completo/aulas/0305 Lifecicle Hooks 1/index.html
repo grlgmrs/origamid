@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0305</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{ mensagem }}</p>
+    </div>
+    <script>
+      const githubApi = "https://api.github.com/users/origamid";
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          mensagem: "Essa é uma mensagem",
+          github: {},
+        },
+        methods: {
+          puxarGithub() {
+            fetch(githubApi)
+              .then((r) => r.json())
+              .then((r) => {
+                this.github = r;
+              });
+          },
+        },
+        beforeCreate() {
+          console.log("antes da criação");
+          console.log(this.mensagem);
+        },
+        created() {
+          this.puxarGithub();
+
+          console.log("criado");
+          console.log(this.mensagem);
+          console.log("Elemento", this.$el);
+        },
+        beforeMount() {
+          console.log("antes de montar");
+          console.log(this.mensagem);
+          console.log("Elemento", this.$el);
+        },
+        mounted() {
+          console.log("mounted")
+          console.log("Elemento", this.$el);
+        }
+      });
+    </script>
+  </body>
+</html>
