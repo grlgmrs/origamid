@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0304</title>
+
+    <style>
+      body {
+        height: 5000px;
+      }
+
+      .scrollInfo {
+        top: 0;
+        right: 0;
+        position: fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <span class="scrollInfo">{{ totalScroll }}</span>
+      <input type="text" @click="ativar" @keydown.enter="ativar" />
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          totalScroll: 0,
+        },
+        methods: {
+          ativar(e, a) {
+            console.log(e, a);
+          },
+          handleScroll(e) {
+            // Enter
+            if(e.keyCode === 13) {
+              this.totalScroll = window.scrollY;
+            }
+          },
+        },
+        created() {
+          window.addEventListener("keyup", this.handleScroll);
+        }
+      });
+    </script>
+  </body>
+</html>
