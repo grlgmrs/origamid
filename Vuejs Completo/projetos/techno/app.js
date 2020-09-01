@@ -2,6 +2,7 @@ const vm = new Vue({
   el: "#app",
   data: {
     products: {},
+    product: false,
   },
   filters: {
     formatPrice(v) {
@@ -17,6 +18,13 @@ const vm = new Vue({
         .then((r) => r.json())
         .then((r) => {
           this.products = r;
+        });
+    },
+    fetchProduct(id) {
+      fetch(`./api/produtos/${id}/dados.json`)
+        .then((r) => r.json())
+        .then((r) => {
+          this.product = r;
         });
     },
   },

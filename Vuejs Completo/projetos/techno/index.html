@@ -9,11 +9,14 @@
   </head>
   <body>
     <div id="app">
+      <section class="modal">{{ product }}</section>
+
       <section class="products">
         <div
           class="product"
           v-for="(product, index) in products"
           :key="product.id"
+          @click="fetchProduct(product.id)"
         >
           <img :src="product.img" :alt="product.nome" class="product-img" />
           <div class="product-info">
