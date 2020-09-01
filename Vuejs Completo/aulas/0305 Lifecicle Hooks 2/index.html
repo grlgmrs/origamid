@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Aula 0305 - Ex 1</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>Dados Github {{ user }}</h3>
+      <ul>
+        <li v-for="(value, key) in gitData">{{ key }}: {{ value }}</li>
+      </ul>
+    </div>
+    <script>
+      const githubApi = "https://api.github.com/users/";
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          user: "grlgmrs",
+          gitData: {},
+        },
+        methods: {
+          puxarGit() {
+            fetch(githubApi + this.user)
+              .then((r) => r.json())
+              .then((r) => {
+                this.gitData = r;
+              });
+          },
+        },
+        created() {
+          this.puxarGit();
+        }
+      });
+    </script>
+  </body>
+</html>
