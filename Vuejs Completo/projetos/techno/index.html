@@ -14,24 +14,26 @@
           <div class="modal-img">
             <img :src="product.img" :alt="product.nome" />
           </div>
-        </div>
-        <div class="modal-data">
-          <span class="modal-price">{{ product.preco }}</span>
-          <h2 class="modal-title">{{ product.nome}}</h2>
-          <p>{{ product.descricao}}</p>
-          <button>Adicionar Item</button>
-        </div>
-        <div class="reviews">
-          <h2 class="review-subtitle">Avaliações</h2>
-          <ul>
-            <li
-              v-for="({nome, estrelas, descricao}, index) in product.avaliacoes"
-              class="review"
-            >
-              <p class="review-description">{{ descricao }}</p>
-              <p class="review-author">{{ nome }} | {{ estrelas }} estrelas</p>
-            </li>
-          </ul>
+          <div class="modal-data">
+            <span class="modal-price">{{ product.preco }}</span>
+            <h2 class="modal-title">{{ product.nome}}</h2>
+            <p>{{ product.descricao}}</p>
+            <button class="modal-btn">Adicionar Item</button>
+          </div>
+          <div class="reviews">
+            <h2 class="review-subtitle">Avaliações</h2>
+            <ul>
+              <li
+                v-for="({nome, estrelas, descricao}, index) in product.avaliacoes"
+                class="review"
+              >
+                <p class="review-description">{{ descricao }}</p>
+                <p class="review-author">
+                  {{ nome }} | {{ estrelas }} estrelas
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
