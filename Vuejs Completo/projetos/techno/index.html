@@ -17,7 +17,9 @@
         >
           <img :src="product.img" :alt="product.nome" class="product-img" />
           <div class="product-info">
-            <span class="product-price"> {{ product.preco }} </span>
+            <span class="product-price">
+              {{ product.preco | formatPrice }}
+            </span>
             <h2 class="product-title">{{ product.nome }}</h2>
           </div>
         </div>
